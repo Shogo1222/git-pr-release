@@ -4,7 +4,7 @@
 <% feature_pr = pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:feature]} }-%>
 <% bugfix_pr = pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:bugfix]} }-%>
 <% migration_pr = pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:migration]} }-%>
-<% others = pull_requests.map{ |pr| pr.labels.reject{ |l| l.name.include?(labels.values)} }-%>
+<% others = pull_requests.map{ |pr| pr.labels.reject{ |l| labels.values.include?(l.name)} }-%>
 
 <% feature_pr.each do |pr| -%>
   <%= pr %>
