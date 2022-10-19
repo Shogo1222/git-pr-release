@@ -1,20 +1,23 @@
 [Release] <%= Time.now.localtime("+09:00").strftime("%Y-%m-%d %H:%M:%S") %>
-<% pull_requests.each do |pr| -%>
-  <% if pr.labels.any?{ |l| l.name == 'feature'} %>
+
+<% labels = {feature: 'feature', bugfix: 'bugfix', migration: 'migration'}-%>
+
 ## 機能開発
-<%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
-    <% next %>
-  <% end %>
-  <% if pr.labels.any?{ |l| l.name == 'bugfix'} %>
+<% pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:feature]} } do |pr| -%>
+  <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
+<% end -%>
+
 ## 不具合修正
-<%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
-    <% next %>
-  <% end %>
-  <% if pr.labels.any?{ |l| l.name == 'migration'} %>
+<% pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:bugfix]} } do |pr| -%>
+  <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
+<% end -%>
+
 ## マイグレーション
-<%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
-    <% next %>
-  <% end %>
+<% pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:migration]} } do |pr| -%>
+  <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
+<% end -%>
+
 ## その他
-<%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
+<% pull_requests.map{ |pr| pr.labels.reject{ |l| l.name.include?(labels.values)} } do |pr| -%>
+  <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
 <% end -%>
