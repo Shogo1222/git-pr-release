@@ -7,8 +7,9 @@
 <%# others = pull_requests.map{ |pr| pr.labels.reject{ |l| labels.values.include?(l.name)} }.flatten-%>
 
 
-<% pull_requests -%>
-
+<% pull_requests.each do |pr| -%>
+  <%= pr %>
+<% end -%>
 
 ## 機能開発
 <%# feature_pr&.each do |pr| -%>
