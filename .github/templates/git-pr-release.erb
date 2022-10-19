@@ -1,20 +1,20 @@
 [Release] <%= Time.now.localtime("+09:00").strftime("%Y-%m-%d %H:%M:%S") %>
 <% pull_requests.each do |pr| -%>
   <% if pr.labels.any?{ |l| l.name == 'feature'} %>
-    ## 機能開発
-    <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
+## 機能開発
+<%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
     <% next %>
   <% end %>
   <% if pr.labels.any?{ |l| l.name == 'bugfix'} %>
-    ## 不具合修正
-    <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
+## 不具合修正
+<%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
     <% next %>
   <% end %>
   <% if pr.labels.any?{ |l| l.name == 'migration'} %>
-    ## マイグレーション
-    <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
+## マイグレーション
+<%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
     <% next %>
   <% end %>
-  ## その他
-  <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
+## その他
+<%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
 <% end -%>
