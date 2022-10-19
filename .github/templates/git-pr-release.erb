@@ -1,31 +1,27 @@
 [Release] <%= Time.now.localtime("+09:00").strftime("%Y-%m-%d %H:%M:%S") %>
 
 <% labels = {feature: 'feature', bugfix: 'bugfix', migration: 'migration'}-%>
-<% feature_pr = pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:feature]} }-%>
-<% bugfix_pr = pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:bugfix]} }-%>
-<% migration_pr = pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:migration]} }-%>
-<% others = pull_requests.map{ |pr| pr.labels.reject{ |l| labels.values.include?(l.name)} }-%>
-
-<% feature_pr.each do |pr| -%>
-  <%= pr %>
-<% end -%>
+<% feature_pr = pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:feature]} }.compact!-%>
+<% bugfix_pr = pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:bugfix]} }.compact!-%>
+<% migration_pr = pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:migration]} }.compact!-%>
+<% others = pull_requests.map{ |pr| pr.labels.reject{ |l| labels.values.include?(l.name)} }.compact!-%>
 
 ## 機能開発
-<%# feature_pr.each do |pr| -%>
-  <%#= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
-<%# end -%>
+<% feature_pr.each do |pr| -%>
+  <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
+<% end -%>
 
 ## 不具合修正
-<%# bugfix_pr.each do |pr| -%>
-  <%#= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
-<%# end -%>
+<% bugfix_pr.each do |pr| -%>
+  <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
+<% end -%>
 
 ## マイグレーション
-<%# migration_pr.each do |pr| -%>
-  <%#= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
-<%# end -%>
+<% migration_pr.each do |pr| -%>
+  <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
+<% end -%>
 
 ## その他
-<%# others.each do |pr| -%>
-  <%#= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
-<%# end -%>
+<% others.each do |pr| -%>
+  <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
+<% end -%>
