@@ -22,4 +22,7 @@
 <% end -%>
 
 ## その他
-  <%= others %>
+<%= pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:feature]} } %>
+<%= feature_pr %>
+<%= others %>
+<%= labels.values %>
