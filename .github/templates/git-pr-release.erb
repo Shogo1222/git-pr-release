@@ -2,9 +2,9 @@
 
 <% labels = {feature: 'feature', bugfix: 'bugfix', migration: 'migration'}-%>
 <% feature_pr = pull_requests.filter{ |pr| pr.labels.any?{ |l| l.name == labels[:feature]} }-%>
-<%# bugfix_pr = pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:bugfix]} }.flatten-%>
-<%# migration_pr = pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:migration]} }.flatten-%>
-<%# others = pull_requests.map{ |pr| pr.labels.reject{ |l| labels.values.include?(l.name)} }.flatten-%>
+<% bugfix_pr = pull_requests.filter{ |pr| pr.labels.filter{ |l| l.name == labels[:bugfix]} }-%>
+<% migration_pr = pull_requests.filter{ |pr| pr.labels.filter{ |l| l.name == labels[:migration]} }-%>
+<% others = pull_requests.filter{ |pr| pr.labels.reject{ |l| labels.values.include?(l.name)} }-%>
 
 ## 機能開発
 <% feature_pr&.each do |pr| -%>
@@ -12,14 +12,16 @@
 <% end -%>
 
 ## 不具合修正
-<%# bugfix_pr&.each do |pr| -%>
-  <%#= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
-<%# end -%>
+<% bugfix_pr&.each do |pr| -%>
+  <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
+<% end -%>
 
 ## マイグレーション
-<%# migration_pr&.each do |pr| -%>
-  <%#= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
-<%# end -%>
+<% migration_pr&.each do |pr| -%>
+  <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
+<% end -%>
 
 ## その他
-<%#= others %>
+<% others&.each do |pr| -%>
+  <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
+<% end -%>
