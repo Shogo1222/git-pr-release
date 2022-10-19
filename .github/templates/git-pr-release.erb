@@ -6,14 +6,10 @@
 <%# migration_pr = pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:migration]} }.flatten-%>
 <%# others = pull_requests.map{ |pr| pr.labels.reject{ |l| labels.values.include?(l.name)} }.flatten-%>
 
-
-<%= feature_pr %>
-
-
 ## 機能開発
-<%# feature_pr&.each do |pr| -%>
-  <%#= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
-<%# end -%>
+<% feature_pr&.each do |pr| -%>
+  <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
+<% end -%>
 
 ## 不具合修正
 <%# bugfix_pr&.each do |pr| -%>
