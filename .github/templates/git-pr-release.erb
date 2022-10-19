@@ -4,7 +4,7 @@
 <% feature_pr = pull_requests.filter{ |pr| pr.labels.any?{ |l| l.name == fixed_labels[:feature]} }-%>
 <% bugfix_pr = pull_requests.filter{ |pr| pr.labels.any?{ |l| l.name == fixed_labels[:bugfix]} }-%>
 <% migration_pr = pull_requests.filter{ |pr| pr.labels.any?{ |l| l.name == fixed_labels[:migration]} }-%>
-<% others = pull_requests.filter{ |pr| pr.labels.any?{ |l| l.name.nil? || !fixed_labels.include?(l.name)} }-%>
+<% others = pull_requests.filter{ |pr| pr.labels.empty? || pr.labels.any?{ |l| fixed_labels.include?(l.name)} }-%>
 
 ## 機能開発
 <% feature_pr&.each do |pr| -%>
