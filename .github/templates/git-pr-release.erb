@@ -22,4 +22,17 @@
 <% end -%>
 
 ## その他
-<%= pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:feature]} } %>
+<%= pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:feature]} }.flatten %>
+
+
+[[], [], [], [], [], [], [],
+[{:id=>4691066579,
+:node_id=>"LA_kwDOIQX_kc8AAAABF5v-0w",
+:url=>"https://api.github.com/repos/Shogo1222/git-pr-release/labels/feature",
+:name=>"feature",
+:color=>"D3CAB4",
+:default=>false,
+:description=>""}
+],
+[]
+]
