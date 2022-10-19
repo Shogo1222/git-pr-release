@@ -3,21 +3,21 @@
 <% labels = {feature: 'feature', bugfix: 'bugfix', migration: 'migration'}-%>
 
 ## 機能開発
-<% pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:feature]} } do |pr| -%>
+<% pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:feature]} }.each do |pr| -%>
   <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
 <% end -%>
 
 ## 不具合修正
-<% pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:bugfix]} } do |pr| -%>
+<% pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:bugfix]} }.each do |pr| -%>
   <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
 <% end -%>
 
 ## マイグレーション
-<% pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:migration]} } do |pr| -%>
+<% pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:migration]} }.each do |pr| -%>
   <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
 <% end -%>
 
 ## その他
-<% pull_requests.map{ |pr| pr.labels.reject{ |l| l.name.include?(labels.values)} } do |pr| -%>
+<% pull_requests.map{ |pr| pr.labels.reject{ |l| l.name.include?(labels.values)} }.each do |pr| -%>
   <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
 <% end -%>
