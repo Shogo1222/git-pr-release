@@ -2,9 +2,9 @@
 
 <% labels = {feature: 'feature', bugfix: 'bugfix', migration: 'migration'}-%>
 <% feature_pr = pull_requests.filter{ |pr| pr.labels.any?{ |l| l.name == labels[:feature]} }-%>
-<% bugfix_pr = pull_requests.filter{ |pr| pr.labels.filter{ |l| l.name == labels[:bugfix]} }-%>
-<% migration_pr = pull_requests.filter{ |pr| pr.labels.filter{ |l| l.name == labels[:migration]} }-%>
-<% others = pull_requests.filter{ |pr| pr.labels.reject{ |l| labels.values.include?(l.name)} }-%>
+<% bugfix_pr = pull_requests.filter{ |pr| pr.labels.any?{ |l| l.name == labels[:bugfix]} }-%>
+<% migration_pr = pull_requests.filter{ |pr| pr.labels.any?{ |l| l.name == labels[:migration]} }-%>
+<% others = pull_requests.reject{ |pr| pr.labels.any?{ |l| labels.include?(l.name)} }-%>
 
 ## 機能開発
 <% feature_pr&.each do |pr| -%>
