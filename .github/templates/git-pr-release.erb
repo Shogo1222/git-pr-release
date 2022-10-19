@@ -1,7 +1,7 @@
 [Release] <%= Time.now.localtime("+09:00").strftime("%Y-%m-%d %H:%M:%S") %>
 
 <% labels = {feature: 'feature', bugfix: 'bugfix', migration: 'migration'}-%>
-<% feature_pr = pull_requests.map{ |pr| pr if pr.labels.any?{ |l| l.name == labels[:feature]} }.flatten-%>
+<% feature_pr = pull_requests.map{ |pr| pr if pr.labels.any?{ |l| l.name == labels[:feature]} }-%>
 <%# bugfix_pr = pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:bugfix]} }.flatten-%>
 <%# migration_pr = pull_requests.map{ |pr| pr.labels.filter{ |l| l.name == labels[:migration]} }.flatten-%>
 <%# others = pull_requests.map{ |pr| pr.labels.reject{ |l| labels.values.include?(l.name)} }.flatten-%>
