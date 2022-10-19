@@ -8,11 +8,8 @@
 
 
 <% pull_requests.each do |pr| -%>
-  <%= pr %>
+  <%= pr.labels.any?{ |l| l.name == labels[:feature]} %>
 <% end -%>
-
---
-<%= pull_requests -%>
 
 
 ## 機能開発
