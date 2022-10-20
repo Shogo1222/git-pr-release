@@ -1,0 +1,11 @@
+# Apply label "feature" if head matches "feature/*"
+feature:
+  head: "feature/*"
+
+# Apply label "bugfix" if head matches one of "bugfix/*"
+bugfix:
+  head: "bugfix/*"
+
+# Apply label "migration" if head matches one of "migration/*"
+migration:
+  head: "migration/*"

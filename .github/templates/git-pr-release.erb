@@ -1,0 +1,27 @@
+[Release] <%= Time.now.localtime("+09:00").strftime("%Y-%m-%d %H:%M:%S") %>
+
+<% fixed_labels = {feature: 'feature', bugfix: 'bugfix', migration: 'migration'}-%>
+<% feature_pr = pull_requests.filter{ |pr| pr.labels.any?{ |l| l.name == fixed_labels[:feature]} }-%>
+<% bugfix_pr = pull_requests.filter{ |pr| pr.labels.any?{ |l| l.name == fixed_labels[:bugfix]} }-%>
+<% migration_pr = pull_requests.filter{ |pr| pr.labels.any?{ |l| l.name == fixed_labels[:migration]} }-%>
+<% others = pull_requests.filter{ |pr| pr.labels.empty? || !pr.labels.any?{ |l| fixed_labels.values.include?(l.name)} }-%>
+
+## 機能開発
+<% feature_pr&.each do |pr| -%>
+  <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
+<% end -%>
+
+## 不具合修正
+<% bugfix_pr&.each do |pr| -%>
+  <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
+<% end -%>
+
+## マイグレーション
+<% migration_pr&.each do |pr| -%>
+  <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
+<% end -%>
+
+## その他
+<% others&.each do |pr| -%>
+  <%= "- [#{pr.title}](#{pr.html_url}) by #{pr.mention}" %>
+<% end -%>

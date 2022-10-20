@@ -4,7 +4,7 @@ on:
     types:
       - git-pr-release
   workflow_dispatch:
-  
+
 jobs:
   git-pr-release:
     runs-on: ubuntu-latest
@@ -15,10 +15,11 @@ jobs:
       - uses: actions/setup-ruby@v1
         with:
           ruby-version: 3.1
-      - run: gem install --no-document git-pr-release
-      - run: git-pr-release --squashed
+      - run: gem install  --no-document git-pr-release -v "2.2.0"
+      - run: git-pr-release
         env:
           GIT_PR_RELEASE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GIT_PR_RELEASE_BRANCH_PRODUCTION: main
           GIT_PR_RELEASE_BRANCH_STAGING: develop
           GIT_PR_RELEASE_LABELS: pr-release
+          GIT_PR_RELEASE_TEMPLATE: .github/templates/git-pr-release.erb
